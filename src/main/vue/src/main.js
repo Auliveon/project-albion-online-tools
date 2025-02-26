@@ -6,7 +6,8 @@ import { locale } from './assets/primevue-locale-ru';
 import { createPinia } from 'pinia'
 import {setLocale} from 'yup';
 import {ru} from 'yup-locales';
-
+import './assets/styles/styles.css';
+import './assets/styles/variables.css';
 
 setLocale(ru);
 

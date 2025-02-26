@@ -3,9 +3,9 @@
 </script>
 
 <template>
-  <div>
-    <label>Main Page</label>
-  </div>
+<div>
+  <label>Router View</label>
+</div>
 </template>
 
 <style scoped>
