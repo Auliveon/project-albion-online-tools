@@ -1,6 +1,7 @@
 <script setup>
 import {RouterView} from "vue-router";
-import HorizontalMenu from "@/components/menu/HorizontalMenu";
+import HorizontalMenuComponent from "@/components/menu/HorizontalMenuComponent";
+import FooterComponent from "@/components/footer/FooterComponent";
 
 window.addEventListener('vite:preloadError', () => {
   alert("Ошибка загрузки ресурсов сервера!");
@@ -27,6 +28,7 @@ const menuItems = [
 </script>
 
 <template>
-  <HorizontalMenu :items="menuItems"/>
+  <HorizontalMenuComponent :items="menuItems"/>
   <RouterView />
+  <FooterComponent :text="'© 2025 Albion Online Tools. All rights reserved.'"/>
 </template>

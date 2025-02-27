@@ -7,7 +7,7 @@ export const RouterPage = [
         component: RouterView,
         props: (route) => route.query,
         meta: {
-            pageTitle: "Albion Tools"
+            pageTitle: "Albion Online Tools"
         }
     }
 ]

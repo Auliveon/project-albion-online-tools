@@ -1,6 +1,6 @@
 package by.savitsky.dto.operations;
 
-public class AddResource implements IOperation {
+public class AddResource implements IStartOperation {
 
     private String id;
 
@@ -10,9 +10,9 @@ public class AddResource implements IOperation {
 
     private int perOnePrice;
 
-    private double sellTax;
+    private double sellTaxPercent;
 
-    private double buyOrderTax;
+    private double buyOrderTaxPercent;
 
     private boolean free;
 
@@ -48,20 +48,20 @@ public class AddResource implements IOperation {
         this.perOnePrice = perOnePrice;
     }
 
-    public double getSellTax() {
-        return sellTax;
+    public double getSellTaxPercent() {
+        return sellTaxPercent;
     }
 
-    public void setSellTax(double sellTax) {
-        this.sellTax = sellTax;
+    public void setSellTaxPercent(double sellTaxPercent) {
+        this.sellTaxPercent = sellTaxPercent;
     }
 
-    public double getBuyOrderTax() {
-        return buyOrderTax;
+    public double getBuyOrderTaxPercent() {
+        return buyOrderTaxPercent;
     }
 
-    public void setBuyOrderTax(double buyOrderTax) {
-        this.buyOrderTax = buyOrderTax;
+    public void setBuyOrderTaxPercent(double buyOrderTaxPercent) {
+        this.buyOrderTaxPercent = buyOrderTaxPercent;
     }
 
     public boolean isFree() {
@@ -70,19 +70,6 @@ public class AddResource implements IOperation {
 
     public void setFree(boolean free) {
         this.free = free;
-    }
-
-    @Override
-    public String toString() {
-        return "AddResource{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", count=" + count +
-                ", perOnePrice=" + perOnePrice +
-                ", sellTax=" + sellTax +
-                ", buyOrderTax=" + buyOrderTax +
-                ", free=" + free +
-                '}';
     }
 
     @Override

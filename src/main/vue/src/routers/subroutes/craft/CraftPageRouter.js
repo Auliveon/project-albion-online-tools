@@ -7,7 +7,7 @@ export const CraftPage = [
         component: CraftView,
         props: (route) => route.query,
         meta: {
-            pageTitle: "Albion Tools"
+            pageTitle: "Albion Online Tools"
         }
     }
 ]

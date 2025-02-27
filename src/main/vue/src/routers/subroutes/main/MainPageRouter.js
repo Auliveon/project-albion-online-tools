@@ -7,7 +7,7 @@ export const MainPage = [
         component: MainView,
         props: (route) => route.query,
         meta: {
-            pageTitle: "Albion Tools"
+            pageTitle: "Albion Online Tools"
         }
     }
 ]
