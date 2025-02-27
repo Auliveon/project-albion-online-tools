@@ -19,7 +19,7 @@ async function navigateTo(routeName, path) {
 </script>
 
 <template>
-  <div class="flex gray text-color-white">
+  <div class="flex light-blue-gray text-color-white">
     <h2 class="mg-l-1">Albion Online Tools</h2>
     <div class="mg-l-auto mg-r-1 mg-t-20px">
       <label

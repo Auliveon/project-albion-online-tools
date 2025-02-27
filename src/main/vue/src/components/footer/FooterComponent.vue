@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <footer class="gray">
+  <footer class="light-blue-gray">
     {{ props.text }}
   </footer>
 </template>
