@@ -1,20 +1,14 @@
 package by.savitsky.dto.operations;
 
-public class AddResource implements IStartOperation {
+import java.util.List;
+
+public class AddResource implements IOperation {
 
     private String id;
 
-    private String name;
+    private List<ItemInfo> itemInfos;
 
-    private int count;
-
-    private int perOnePrice;
-
-    private double sellTaxPercent;
-
-    private double buyOrderTaxPercent;
-
-    private boolean free;
+    private int stage;
 
     public String getId() {
         return id;
@@ -24,57 +18,30 @@ public class AddResource implements IStartOperation {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public List<ItemInfo> getItemInfos() {
+        return itemInfos;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public int getPerOnePrice() {
-        return perOnePrice;
-    }
-
-    public void setPerOnePrice(int perOnePrice) {
-        this.perOnePrice = perOnePrice;
-    }
-
-    public double getSellTaxPercent() {
-        return sellTaxPercent;
-    }
-
-    public void setSellTaxPercent(double sellTaxPercent) {
-        this.sellTaxPercent = sellTaxPercent;
-    }
-
-    public double getBuyOrderTaxPercent() {
-        return buyOrderTaxPercent;
-    }
-
-    public void setBuyOrderTaxPercent(double buyOrderTaxPercent) {
-        this.buyOrderTaxPercent = buyOrderTaxPercent;
-    }
-
-    public boolean isFree() {
-        return free;
-    }
-
-    public void setFree(boolean free) {
-        this.free = free;
+    public void setItemInfos(List<ItemInfo> itemInfos) {
+        this.itemInfos = itemInfos;
     }
 
     @Override
-    public int getExpenses() {
-        return 0;
+    public ResultInfo getResult() {
+        final int sum = itemInfos.stream().mapToInt(itemInfo -> (int) itemInfo.evaluateCost()).sum();
+        final ResultInfo resultInfo = new ResultInfo();
+        resultInfo.setItems(itemInfos);
+        resultInfo.setExpenses(sum);
+        return resultInfo;
+    }
+
+    @Override
+    public int getStage() {
+        return stage;
+    }
+
+    public void setStage(int stage) {
+        this.stage = stage;
     }
 
 }

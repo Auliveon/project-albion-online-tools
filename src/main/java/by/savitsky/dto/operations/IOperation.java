@@ -2,6 +2,8 @@ package by.savitsky.dto.operations;
 
 public interface IOperation {
 
-    int getExpenses();
+    ResultInfo getResult();
+
+    int getStage();
 
 }
