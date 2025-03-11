@@ -1,6 +1,10 @@
 package by.savitsky.dto.operations;
 
+import java.util.UUID;
+
 public class ItemInfo {
+
+    private String uid;
 
     private String id;
 
@@ -8,9 +12,16 @@ public class ItemInfo {
     private double buyOrderTaxPercent;
 
     public ItemInfo() {
+        this.uid = UUID.randomUUID().toString();
+    }
+
+    public ItemInfo(String id) {
+        this.uid = UUID.randomUUID().toString();
+        this.id = id;
     }
 
     public ItemInfo(String id, double cost, double buyOrderTaxPercent) {
+        this.uid = UUID.randomUUID().toString();
         this.id = id;
         this.cost = cost;
         this.buyOrderTaxPercent = buyOrderTaxPercent;

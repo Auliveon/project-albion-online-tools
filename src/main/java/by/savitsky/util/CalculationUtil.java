@@ -10,4 +10,8 @@ public class CalculationUtil {
         return addPercent((double) source, percent);
     }
 
+    public static int getPercentFromCount(int total, double percent) {
+        return (int) (total * percent);
+    }
+
 }

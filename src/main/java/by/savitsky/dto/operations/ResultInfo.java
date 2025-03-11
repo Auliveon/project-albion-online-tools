@@ -2,19 +2,18 @@ package by.savitsky.dto.operations;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 public class ResultInfo {
 
-    private Queue<ItemInfo> items;
+    private List<ItemInfo> items;
 
     private int expenses;
 
-    public Queue<ItemInfo> getItems() {
+    public List<ItemInfo> getItems() {
         return items;
     }
 
-    public void setItems(Queue<ItemInfo> items) {
+    public void setItems(List<ItemInfo> items) {
         this.items = items;
     }
 
@@ -38,6 +37,10 @@ public class ResultInfo {
             this.items = new LinkedList<>();
         }
         this.items.addAll(items);
+    }
+
+    public boolean isEmpty() {
+        return getItems().isEmpty();
     }
 
 }
