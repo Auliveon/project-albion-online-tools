@@ -27,7 +27,7 @@ public class AddResource implements IOperation {
     }
 
     @Override
-    public ResultInfo getResult() {
+    public ResultInfo execute(List<ResultInfo> previousResultInfos) {
         final int sum = itemInfos.stream().mapToInt(itemInfo -> (int) itemInfo.evaluateCost()).sum();
         final ResultInfo resultInfo = new ResultInfo();
         resultInfo.setItems(itemInfos);
