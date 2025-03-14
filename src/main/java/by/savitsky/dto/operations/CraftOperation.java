@@ -32,10 +32,7 @@ public class CraftOperation implements ICraftOperation {
     public ResultInfo execute(List<ResultInfo> previousResultInfos) {
         final ResultInfo resultInfo = new ResultInfo();
         final List<ItemInfo> resultItems = craft(recipe, count, new AtomicInteger(count), returnOfResourcesPercent,
-                previousResultInfos.stream()
-                        .map(ResultInfo::getItems)
-                        .flatMap(Collection::stream)
-                        .collect(Collectors.toList()));
+                previousResultInfos.stream().map(ResultInfo::getItems).collect(Collectors.toList()));
         resultInfo.setItems(resultItems);
         resultInfo.setExpenses(recipe.getCraftCost() * resultItems.size());
         return resultInfo;
@@ -88,7 +85,7 @@ public class CraftOperation implements ICraftOperation {
     }
 
     private List<ItemInfo> craft(Recipe recipe, int count, AtomicInteger remainCount, double returnOfResourcesPercent,
-            List<ItemInfo> incomingResources) {
+            List<List<ItemInfo>> incomingResources) {
         final List<ItemInfo> result = new ArrayList<>();
         final Map<String, Integer> recipeMap = CommonUtil.getRecipeMap(recipe);
         for (; remainCount.get() > 0; remainCount.decrementAndGet()) {
@@ -107,7 +104,7 @@ public class CraftOperation implements ICraftOperation {
                             CalculationUtil.getPercentFromCount(entry.getValue() * result.size(),
                                     returnOfResourcesPercent)))
                     .flatMap(Collection::stream).toList();
-            result.addAll(craft(recipe, count, remainCount, returnOfResourcesPercent, returnedResources));
+            result.addAll(craft(recipe, count, remainCount, returnOfResourcesPercent, Collections.singletonList(returnedResources)));
         }
         return result;
     }
@@ -117,16 +114,20 @@ public class CraftOperation implements ICraftOperation {
                 .allMatch(entry -> resourceMap.get(entry.getKey()).size() == entry.getValue());
     }
 
-    private void extractItems(Iterator<ItemInfo> itemInfoIterator, String key, Integer requiredCount,
+    private void extractItems(Iterator<List<ItemInfo>> listItemInfoIterator, String key, Integer requiredCount,
             Map<String, List<ItemInfo>> resourceMap) {
-        while (itemInfoIterator.hasNext()) {
-            final ItemInfo itemInfo = itemInfoIterator.next();
-            if (resourceMap.get(key).size() != requiredCount && key.equals(itemInfo.getId())) {
-                resourceMap.get(key).add(itemInfo);
-                itemInfoIterator.remove();
-            } else {
-                break;
+        while (listItemInfoIterator.hasNext()) {
+            final Iterator<ItemInfo> itemInfoIterator = listItemInfoIterator.next().listIterator();
+            while (itemInfoIterator.hasNext()) {
+                final ItemInfo itemInfo = itemInfoIterator.next();
+                if (resourceMap.get(key).size() != requiredCount && key.equals(itemInfo.getId())) {
+                    resourceMap.get(key).add(itemInfo);
+                    itemInfoIterator.remove();
+                } else {
+                    break;
+                }
             }
+
         }
     }
 

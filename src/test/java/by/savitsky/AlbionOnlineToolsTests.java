@@ -2,6 +2,7 @@ package by.savitsky;
 
 import by.savitsky.config.GlobalTestConfig;
 import by.savitsky.dto.operations.AddOperation;
+import by.savitsky.dto.operations.CraftOperation;
 import by.savitsky.dto.operations.IOperation;
 import by.savitsky.dto.operations.ProductionChain;
 import by.savitsky.dto.result.AlbionOnlineResultContainer;
@@ -34,8 +35,11 @@ public class AlbionOnlineToolsTests {
     public void singleThreadOperationExecutorTest() {
         final ProductionChain chain = new ProductionChain();
         final List<IOperation> operations = new ArrayList<>();
-        operations.add(operationProvider.createAddOperation("item1", 1000, 0, 100, 0));
-        operations.add(operationProvider.createCraftOperation(500, 1, Map.of("item1", 3), 24.8, 100, "result1", 170));
+        final AddOperation addOperation = operationProvider.createAddOperation("item1", 1000, 0, 500, 0);
+        final CraftOperation craftOperation = operationProvider.createCraftOperation(500, 1, Map.of("item1", 3), 24.8,
+                100, "result1", 17000);
+        operations.add(addOperation);
+        operations.add(craftOperation);
         chain.setOperations(operations);
         System.out.println(executor.executeChain(chain, AlbionOnlineResultContainer.class));
     }
