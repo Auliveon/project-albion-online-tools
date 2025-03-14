@@ -1,5 +1,8 @@
 package by.savitsky.dto.operations;
 
+import by.savitsky.dto.items.ResultInfo;
+import by.savitsky.dto.items.ItemInfo;
+import by.savitsky.dto.items.Recipe;
 import by.savitsky.util.CalculationUtil;
 import by.savitsky.util.CommonUtil;
 
@@ -7,7 +10,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import static by.savitsky.util.CommonUtil.generateItems;
+import static by.savitsky.util.CommonUtil.generateItemInfos;
 
 public class CraftOperation implements ICraftOperation {
 
@@ -39,10 +42,6 @@ public class CraftOperation implements ICraftOperation {
     }
 
     @Override
-    public int getStage() {
-        return stage;
-    }
-
     public String getUid() {
         return uid;
     }
@@ -51,8 +50,23 @@ public class CraftOperation implements ICraftOperation {
         this.uid = uid;
     }
 
+    @Override
+    public int getStage() {
+        return stage;
+    }
+
     public void setStage(int stage) {
         this.stage = stage;
+    }
+
+    @Override
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    @Override
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     public int getCount() {
@@ -63,10 +77,12 @@ public class CraftOperation implements ICraftOperation {
         this.count = count;
     }
 
+    @Override
     public double getReturnOfResourcesPercent() {
         return returnOfResourcesPercent;
     }
 
+    @Override
     public void setReturnOfResourcesPercent(double returnOfResourcesPercent) {
         this.returnOfResourcesPercent = returnOfResourcesPercent;
     }
@@ -82,12 +98,12 @@ public class CraftOperation implements ICraftOperation {
                 extractItems(incomingResources.listIterator(), entry.getKey(), entry.getValue(), resourceMap);
             }
             if (isFilled(recipeMap, resourceMap)) {
-                result.add(new ItemInfo(recipe.getId()));
+                result.add(new ItemInfo(recipe.getResultItemId(), recipe.getResultItemCost(), 0));
             }
         }
         if (remainCount.get() > 0) {
             final List<ItemInfo> returnedResources = CommonUtil.getRecipeMap(recipe).entrySet().stream()
-                    .map(entry -> generateItems(entry.getKey(),
+                    .map(entry -> generateItemInfos(entry.getKey(),
                             CalculationUtil.getPercentFromCount(entry.getValue() * result.size(),
                                     returnOfResourcesPercent)))
                     .flatMap(Collection::stream).toList();

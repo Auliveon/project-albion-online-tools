@@ -1,4 +1,6 @@
-package by.savitsky.dto.operations;
+package by.savitsky.dto.items;
+
+import by.savitsky.dto.items.ItemInfo;
 
 import java.util.LinkedList;
 import java.util.List;

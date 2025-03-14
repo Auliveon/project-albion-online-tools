@@ -1,4 +1,4 @@
-package by.savitsky.executor;
+package by.savitsky.dto.result;
 
 public interface IResultContainer {
 

@@ -1,14 +1,23 @@
 package by.savitsky;
 
 import by.savitsky.config.GlobalTestConfig;
-import by.savitsky.executor.IOperationExecutor;
+import by.savitsky.dto.operations.AddOperation;
+import by.savitsky.dto.operations.IOperation;
+import by.savitsky.dto.operations.ProductionChain;
+import by.savitsky.dto.result.AlbionOnlineResultContainer;
+import by.savitsky.executor.IProductionChainExecutor;
+import by.savitsky.provider.IOperationProvider;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.internal.configuration.GlobalConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @ContextConfiguration(classes = GlobalTestConfig.class)
 @ExtendWith(SpringExtension.class)
@@ -16,11 +25,19 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public class AlbionOnlineToolsTests {
 
     @Autowired
-    private IOperationExecutor executor;
+    private IProductionChainExecutor executor;
+
+    @Autowired
+    private IOperationProvider operationProvider;
 
     @Test
     public void singleThreadOperationExecutorTest() {
-        executor.executeChain(null, null);
+        final ProductionChain chain = new ProductionChain();
+        final List<IOperation> operations = new ArrayList<>();
+        operations.add(operationProvider.createAddOperation("item1", 1000, 0, 100, 0));
+        operations.add(operationProvider.createCraftOperation(500, 1, Map.of("item1", 3), 24.8, 100, "result1", 170));
+        chain.setOperations(operations);
+        System.out.println(executor.executeChain(chain, AlbionOnlineResultContainer.class));
     }
 
 }

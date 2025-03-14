@@ -1,23 +1,30 @@
-package by.savitsky.dto.operations;
+package by.savitsky.dto.items;
 
 import java.util.List;
+import java.util.UUID;
 
 public class Recipe {
 
-    private String id;
+    private String uid;
 
     private String resultItemId;
+
+    private int resultItemCost;
 
     private List<RecipeItem> recipeItems;
 
     private int craftCost;
 
-    public String getId() {
-        return id;
+    public Recipe() {
+        this.uid = UUID.randomUUID().toString();
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getResultItemId() {
@@ -26,6 +33,14 @@ public class Recipe {
 
     public void setResultItemId(String resultItemId) {
         this.resultItemId = resultItemId;
+    }
+
+    public int getResultItemCost() {
+        return resultItemCost;
+    }
+
+    public void setResultItemCost(int resultItemCost) {
+        this.resultItemCost = resultItemCost;
     }
 
     public List<RecipeItem> getRecipeItems() {
@@ -47,7 +62,9 @@ public class Recipe {
     @Override
     public String toString() {
         return "Recipe{" +
-                "id='" + id + '\'' +
+                "uid='" + uid + '\'' +
+                ", resultItemId='" + resultItemId + '\'' +
+                ", resultItemCost=" + resultItemCost +
                 ", recipeItems=" + recipeItems +
                 ", craftCost=" + craftCost +
                 '}';
