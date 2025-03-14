@@ -9,11 +9,11 @@ public class Recipe {
 
     private String resultItemId;
 
-    private int resultItemCost;
+    private long resultItemCost;
 
     private List<RecipeItem> recipeItems;
 
-    private int craftCost;
+    private long craftCost;
 
     public Recipe() {
         this.uid = UUID.randomUUID().toString();
@@ -35,11 +35,11 @@ public class Recipe {
         this.resultItemId = resultItemId;
     }
 
-    public int getResultItemCost() {
+    public long getResultItemCost() {
         return resultItemCost;
     }
 
-    public void setResultItemCost(int resultItemCost) {
+    public void setResultItemCost(long resultItemCost) {
         this.resultItemCost = resultItemCost;
     }
 
@@ -51,11 +51,11 @@ public class Recipe {
         this.recipeItems = recipeItems;
     }
 
-    public int getCraftCost() {
+    public long getCraftCost() {
         return craftCost;
     }
 
-    public void setCraftCost(int craftCost) {
+    public void setCraftCost(long craftCost) {
         this.craftCost = craftCost;
     }
 

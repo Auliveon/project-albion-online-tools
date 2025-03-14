@@ -18,12 +18,17 @@ public class AlbionOnlineResultContainer implements IResultContainer {
 
     public AlbionOnlineResultContainer(List<ResultInfo> resultInfos) {
         this.uid = UUID.randomUUID().toString();
-        this.expenses = resultInfos.stream().mapToInt(ResultInfo::getExpenses).sum();
+        this.expenses = resultInfos.stream().mapToLong(ResultInfo::getExpenses).sum();
         this.resultItems = resultInfos.stream()
                 .map(ResultInfo::getItems)
                 .flatMap(Collection::stream)
                 .map(item -> new ResultItem(item.getId(), item.getCost()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public long getProfit() {
+        return resultItems.stream().mapToLong(ResultItem::getCost).sum() - expenses;
     }
 
     public String getUid() {
@@ -55,7 +60,7 @@ public class AlbionOnlineResultContainer implements IResultContainer {
         return "AlbionOnlineResultContainer{" +
                 "uid='" + uid + '\'' +
                 ", expenses=" + expenses +
-                ", profit=" + (resultItems.stream().mapToInt(ResultItem::getCost).sum() - expenses) +
+                ", profit=" + getProfit() +
                 '}';
     }
 

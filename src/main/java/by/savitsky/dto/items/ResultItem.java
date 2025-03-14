@@ -8,13 +8,13 @@ public class ResultItem {
 
     private String id;
 
-    private int cost;
+    private long cost;
 
     public ResultItem() {
         this.uid = UUID.randomUUID().toString();
     }
 
-    public ResultItem(String id, int cost) {
+    public ResultItem(String id, long cost) {
         this.uid = UUID.randomUUID().toString();
         this.id = id;
         this.cost = cost;
@@ -36,11 +36,11 @@ public class ResultItem {
         this.id = id;
     }
 
-    public int getCost() {
+    public long getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(long cost) {
         this.cost = cost;
     }
 

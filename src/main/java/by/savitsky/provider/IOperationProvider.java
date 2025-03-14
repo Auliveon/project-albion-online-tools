@@ -7,9 +7,9 @@ import java.util.Map;
 
 public interface IOperationProvider {
 
-    AddOperation createAddOperation(String id, int count, int stage, int cost, double buyOrderTaxPercent);
+    AddOperation createAddOperation(String id, long count, int stage, long cost, double buyOrderTaxPercent);
 
-    CraftOperation createCraftOperation(int count, int stage, Map<String, Integer> recipeMap,
-            double returnOfResourcesPercent, int craftCost, String resultItemId, int resultItemCost);
+    CraftOperation createCraftOperation(long count, int stage, Map<String, Long> recipeMap,
+            double returnOfResourcesPercent, long craftCost, String resultItemId, long resultItemCost);
 
 }

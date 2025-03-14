@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class CommonUtil {
 
@@ -18,12 +19,12 @@ public class CommonUtil {
                 .collect(Collectors.toMap(RecipeItem::getId, item -> 1, Integer::sum));
     }
 
-    public static Recipe generateRecipe(Map<String, Integer> recipeMap, int craftCost, String resultItemId, int resultItemCost) {
+    public static Recipe generateRecipe(Map<String, Long> recipeMap, long craftCost, String resultItemId, long resultItemCost) {
         final Recipe recipe = new Recipe();
         recipe.setCraftCost(craftCost);
         recipe.setResultItemId(resultItemId);
         final List<RecipeItem> recipeItems = recipeMap.entrySet().stream()
-                .map(entry -> IntStream.of(entry.getValue()).mapToObj(i -> new RecipeItem(entry.getKey()))
+                .map(entry -> LongStream.range(0, entry.getValue()).mapToObj(i -> new RecipeItem(entry.getKey()))
                         .collect(Collectors.toList()))
                 .flatMap(Collection::stream).toList();
         recipe.setRecipeItems(recipeItems);
@@ -31,16 +32,16 @@ public class CommonUtil {
         return recipe;
     }
 
-    public static List<ItemInfo> generateItemInfos(String id, int count) {
-       return IntStream.range(0, count).mapToObj(i -> new ItemInfo(id)).collect(Collectors.toList());
+    public static List<ItemInfo> generateItemInfos(String id, long count) {
+       return LongStream.range(0, count).mapToObj(i -> new ItemInfo(id)).collect(Collectors.toList());
     }
 
-    public static List<ItemInfo> generateItemInfos(String id, int count, int cost, double buyOrderTaxPercent) {
-       return IntStream.range(0, count).mapToObj(i -> new ItemInfo(id, cost, buyOrderTaxPercent)).collect(Collectors.toList());
+    public static List<ItemInfo> generateItemInfos(String id, long count, long cost, double buyOrderTaxPercent) {
+       return LongStream.range(0, count).mapToObj(i -> new ItemInfo(id, cost, buyOrderTaxPercent)).collect(Collectors.toList());
     }
 
-    public static List<RecipeItem> getRecipeItems(String id, int count) {
-       return IntStream.range(0, count).mapToObj(i -> new RecipeItem(id)).collect(Collectors.toList());
+    public static List<RecipeItem> getRecipeItems(String id, long count) {
+       return LongStream.range(0, count).mapToObj(i -> new RecipeItem(id)).collect(Collectors.toList());
     }
 
 }

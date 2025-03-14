@@ -8,7 +8,7 @@ public class ItemInfo {
 
     private String id;
 
-    private int cost;
+    private long cost;
     private double buyOrderTaxPercent;
 
     public ItemInfo() {
@@ -20,7 +20,7 @@ public class ItemInfo {
         this.id = id;
     }
 
-    public ItemInfo(String id, int cost, double buyOrderTaxPercent) {
+    public ItemInfo(String id, long cost, double buyOrderTaxPercent) {
         this.uid = UUID.randomUUID().toString();
         this.id = id;
         this.cost = cost;
@@ -35,11 +35,11 @@ public class ItemInfo {
         this.uid = uid;
     }
 
-    public int getCost() {
+    public long getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(long cost) {
         this.cost = cost;
     }
 

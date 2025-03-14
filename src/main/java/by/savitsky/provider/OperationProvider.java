@@ -13,7 +13,7 @@ import java.util.Map;
 public class OperationProvider implements IOperationProvider {
 
     @Override
-    public AddOperation createAddOperation(String id, int count, int stage, int cost, double buyOrderTaxPercent) {
+    public AddOperation createAddOperation(String id, long count, int stage, long cost, double buyOrderTaxPercent) {
         final AddOperation result = new AddOperation();
         result.setItems(Collections.singletonList(new AddItem(id, count, cost, buyOrderTaxPercent)));
         result.setStage(stage);
@@ -21,8 +21,8 @@ public class OperationProvider implements IOperationProvider {
     }
 
     @Override
-    public CraftOperation createCraftOperation(int count, int stage, Map<String, Integer> recipeMap,
-            double returnOfResourcesPercent, int craftCost, String resultItemId, int resultItemCost) {
+    public CraftOperation createCraftOperation(long count, int stage, Map<String, Long> recipeMap,
+            double returnOfResourcesPercent, long craftCost, String resultItemId, long resultItemCost) {
         final CraftOperation result = new CraftOperation();
         result.setCount(count);
         result.setStage(stage);

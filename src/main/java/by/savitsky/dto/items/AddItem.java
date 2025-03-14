@@ -8,9 +8,9 @@ public class AddItem {
 
     private String id;
 
-    private int count;
+    private long count;
 
-    private int cost;
+    private long cost;
 
     private double buyOrderTaxPercent;
 
@@ -18,7 +18,7 @@ public class AddItem {
         this.uid = UUID.randomUUID().toString();
     }
 
-    public AddItem(String id, int count, int cost, double buyOrderTaxPercent) {
+    public AddItem(String id, long count, long cost, double buyOrderTaxPercent) {
          this.uid = UUID.randomUUID().toString();
         this.id = id;
         this.count = count;
@@ -42,19 +42,19 @@ public class AddItem {
         this.id = id;
     }
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(long count) {
         this.count = count;
     }
 
-    public int getCost() {
+    public long getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(long cost) {
         this.cost = cost;
     }
 

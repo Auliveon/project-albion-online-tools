@@ -27,7 +27,7 @@ public class AddOperation implements IOperation {
                 .map(item -> CommonUtil.generateItemInfos(item.getId(), item.getCount(), item.getCost(), item.getBuyOrderTaxPercent()))
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
-        final int sum = itemInfos.stream().mapToInt(itemInfo -> (int) itemInfo.evaluateCost()).sum();
+        final long sum = itemInfos.stream().mapToLong(itemInfo -> (long) itemInfo.evaluateCost()).sum();
         final ResultInfo resultInfo = new ResultInfo();
         resultInfo.setItems(itemInfos);
         resultInfo.setExpenses(sum);

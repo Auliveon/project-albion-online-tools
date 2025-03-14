@@ -6,8 +6,10 @@ import by.savitsky.dto.operations.CraftOperation;
 import by.savitsky.dto.operations.IOperation;
 import by.savitsky.dto.operations.ProductionChain;
 import by.savitsky.dto.result.AlbionOnlineResultContainer;
+import by.savitsky.dto.result.IResultContainer;
 import by.savitsky.executor.IProductionChainExecutor;
 import by.savitsky.provider.IOperationProvider;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,13 +37,14 @@ public class AlbionOnlineToolsTests {
     public void singleThreadOperationExecutorTest() {
         final ProductionChain chain = new ProductionChain();
         final List<IOperation> operations = new ArrayList<>();
-        final AddOperation addOperation = operationProvider.createAddOperation("item1", 1000, 0, 500, 0);
-        final CraftOperation craftOperation = operationProvider.createCraftOperation(500, 1, Map.of("item1", 3), 24.8,
-                100, "result1", 17000);
+        final AddOperation addOperation = operationProvider.createAddOperation("item1", 1000, 0, 100, 0);
+        final CraftOperation craftOperation = operationProvider.createCraftOperation(1000, 1, Map.of("item1", 3L), 50,
+                100, "result1", 400);
         operations.add(addOperation);
         operations.add(craftOperation);
         chain.setOperations(operations);
-        System.out.println(executor.executeChain(chain, AlbionOnlineResultContainer.class));
+        final IResultContainer resultContainer = executor.executeChain(chain, AlbionOnlineResultContainer.class);
+        Assertions.assertEquals(0, resultContainer.getProfit());
     }
 
 }

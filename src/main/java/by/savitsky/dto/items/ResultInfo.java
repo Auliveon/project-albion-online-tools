@@ -9,7 +9,7 @@ public class ResultInfo {
 
     private List<ItemInfo> items;
 
-    private int expenses;
+    private long expenses;
 
     public List<ItemInfo> getItems() {
         return items;
@@ -19,11 +19,11 @@ public class ResultInfo {
         this.items = items;
     }
 
-    public int getExpenses() {
+    public long getExpenses() {
         return expenses;
     }
 
-    public void setExpenses(int expenses) {
+    public void setExpenses(long expenses) {
         this.expenses = expenses;
     }
 

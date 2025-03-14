@@ -6,11 +6,11 @@ public class CalculationUtil {
         return source + (source * percent / 100);
     }
 
-    public static double addPercent(int source, double percent) {
+    public static double addPercent(long source, double percent) {
         return addPercent((double) source, percent);
     }
 
-    public static int getPercentFromCount(int total, double percent) {
+    public static int getPercentFromCount(long total, double percent) {
         return (int) (total * percent);
     }
 
